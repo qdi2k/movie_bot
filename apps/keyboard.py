@@ -1,9 +1,10 @@
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,
+                           ReplyKeyboardMarkup, KeyboardButton)
 
 
-find_movie = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Найти', callback_data='new_movies')]
-])
+find_movie = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text='Найти')]
+], resize_keyboard=True, input_field_placeholder='Найти интересующий фильм')
 
 choice = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Сериал', callback_data='series'),
