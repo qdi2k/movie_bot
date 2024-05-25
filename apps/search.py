@@ -33,6 +33,8 @@ def search_query(query, type_movie='series'):
                         'link': url,
                         'title': title.text,
                         'description': description.text[:-4] + '...',
+                        'picture': BeautifulSoup(requests.get(
+                            url).text, "html.parser").find_all('img')[1]['src']
                     }
     return None
 

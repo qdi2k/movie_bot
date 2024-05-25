@@ -29,8 +29,8 @@ async def command_start_handler(message: Message) -> None:
 @router.callback_query(F.data == 'new_movies')
 async def movie_handler(callback: CallbackQuery, state: FSMContext) -> None:
     await state.set_state(Params.type_movie)
-    await callback.message.edit_text('Укажите фильм или сериал вы ищите',
-                                     reply_markup=kb.choice)
+    await callback.message.answer('Укажите фильм или сериал вы ищите',
+                                  reply_markup=kb.choice)
 
 
 @router.callback_query(F.data == 'series')
@@ -59,9 +59,11 @@ async def name_handler(message: Message, state: FSMContext) -> None:
                          parse_mode="html")
     if movie:
         await message.answer("По вашему запросу найдено ✨✨✨:")
-        await message.answer(f"<b>{movie['title']}</b>\n" +
-                             f"{movie['description']}\n" +
-                             f"{movie['link']}", parse_mode="html")
+        await message.answer_photo(photo=movie['picture'],
+                                   caption=f"<b>{movie['title']}</b>\n" +
+                                           f"{movie['description']}\n" +
+                                           f"{movie['link']}",
+                                   parse_mode="html")
     else:
         await message.answer(f"Ваш {type_movies[data['type_movie']]} " +
                              f"не найден 😢")
