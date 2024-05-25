@@ -1,4 +1,4 @@
-import os
+import requests
 
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
@@ -26,9 +26,11 @@ def search_query(query, type_movie='series'):
             description = result.find("div", {"style": "-webkit-line-clamp:2"})
             if link and title and description:
                 if link["href"].split("/")[-2].isdigit():
+                    url = BeautifulSoup(requests.get(
+                        link["href"].replace('ru', 'cx')
+                    ).text, "html.parser").find('a')["href"]
                     return {
-                        'link': f'https://w2.kpfr.wiki/{type_movie}/'
-                                f'{link["href"].split("/")[-2]}',
+                        'link': url,
                         'title': title.text,
                         'description': description.text[:-4] + '...',
                     }
