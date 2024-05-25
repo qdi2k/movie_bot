@@ -54,7 +54,7 @@ async def film_handler(callback: CallbackQuery, state: FSMContext) -> None:
 async def name_handler(message: Message, state: FSMContext) -> None:
     await state.update_data(name=message.text)
     data = await state.get_data()
-    movie = search_query(data['name'].capitalize(), data['type_movie'])
+    movie = search_query(data['name'], data['type_movie'])
     await message.answer(f"Название: <b>{data['name']}</b>\n" +
                          f"Тип: <b>{type_movies[data['type_movie']]}</b>",
                          parse_mode="html")
