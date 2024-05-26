@@ -33,6 +33,6 @@ pip install -r requirements.txt
 python run.py
 ```
 ---
-Ссылка на бота: https://t.me/Guarava_bot <br>
+
 Для связи: https://t.me/qdi2k <br>
 
